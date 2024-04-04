@@ -1,79 +1,125 @@
-### study-of-basic-gates
+# FULL_ADDER_SUBTRACTOR
 
-**AIM:** 
+Implementation-of-Full-Adder-and-Full-subtractor-circuit
 
-To study and verify the truth table of logic gates in Quartus II using Verilog programming.
+**AIM:**
+
+To design a Full Adder and Full Subtractor circuit and verify its truth table in Quartus using Verilog programming.
 
 **Equipments Required:**
 
-Software – Quartus prime 
+Hardware – PCs, Cyclone II , USB flasher
 
-**Theory**
+Software – Quartus prime
 
-Introduction Logic gates are the basic building blocks of any digital system. Logic gates are electronic circuits having one or more than one input and only one output. The relationship between the input and the output is based on a certain logic. Based on this, logic gates are named as
+**Full Adder and Full Subtractor**
 
-AND gate OR gate NOT gate NAND gate NOR gate Ex-OR gate Ex-NOR gate
+**Full Adder**
 
-**AND gate**
+Full adder is a digital circuit used to calculate the sum of three binary bits. It consists of three inputs and two outputs. Two of the input variables, denoted by A and B, represent the two significant bits to be added. The third input, Cin, represents the carry from the previous lower significant position. Two outputs are necessary because the arithmetic sum of three binary digits ranges in value from 0 to 3, and binary 2 or 3 needs two digits. The two outputs are sum and carry.
 
-The AND gate is an electronic circuit that gives a high output (1) only if all its inputs are high. A dot (.) is used to show the AND operation i.e. A.B or can be written as AB
-Y= A.B
+Sum =A’B’Cin + A’BCin’ + ABCin + AB’Cin’ = A ⊕ B ⊕ Cin 
 
-**OR gate** 
+Carry = AB + ACin + BCin
 
-The OR gate is an electronic circuit that gives a high output (1) if one or more of its inputs are high. A plus (+) is used to show the OR operation.
-Y= A+B
+![image](https://github.com/naavaneetha/FULL_ADDER_SUBTRACTOR/assets/154305477/0f30ba51-5ffb-4198-845f-18e054f675e7)
 
-**NOT gate**
+**Figure -1 FULL ADDER**
 
-The NOT gate is an electronic circuit that produces an inverted version of the input at its output. It is also known as an inverter. If the input variable is A, the inverted output is known as NOT A. This is also shown as A' or A with a bar over the top, as shown at the outputs.
-Y= A'
+**Full Subtractor**
 
-**NAND gate**
+A full subtractor is a combinational circuit that performs subtraction involving three bits, namely minuend, subtrahend, and borrow-in . It accepts three inputs: minuend, subtrahend and a borrow bit and it produces two outputs: difference and borrow.
 
-This is a NOT-AND gate which is equal to an AND gate followed by a NOT gate. The outputs of all NAND gates are high if any of the inputs are low. The symbol is an AND gate with a small circle on the output. The small circle represents inversion.
-Y= (AB)’
+![image](https://github.com/naavaneetha/FULL_ADDER_SUBTRACTOR/assets/154305477/02b24f51-ab51-4304-9ad6-7b81ffc1ead5)
 
-**NOR gate**
+Diff = A ⊕ B ⊕ Bin 
 
-This is a NOT-OR gate which is equal to an OR gate followed by a NOT gate. The outputs of all NOR gates are low if any of the inputs are high. The symbol is an OR gate with a small circle on the output. The small circle represents inversion.
-Y= (A+B)’
+Borrow out = A'Bin + A'B + BBin
 
-**Ex-OR gate**
+**Truthtable**
 
-The 'Exclusive-OR' gate is a circuit which will give a high output if either, but not both of its two inputs are high. An encircled plus sign (⊕) is used to show the Ex-OR operation.
-Y= A⊕B
+**FULL ADDER:**
 
-**Ex-NOR gate**
+![DE E-4 truthtable](https://github.com/04Varsha/FULL_ADDER_SUBTRACTOR/assets/149035374/7116d2bf-8e90-4e96-bfd5-d62af11a317a)
 
-The 'Exclusive-NOR' gate circuit does the opposite to the EX-OR gate. It will give a low output if either, but not both of its two inputs are high. The symbol is an EX-OR gate with a small circle on the output. The small circle represents inversion.
-Y= A⊕B
+**FULL SUBTRACTOR:**
 
-**Procedure** 
-
-1.	Type the program in Quartus software.
-
-2.	Compile and run the program.
-
-3.	Generate the RTL schematic and save the logic diagram.
-
-4.	Create nodes for inputs and outputs to generate the timing diagram.
-
-5.	For different input combinations generate the timing diagram.
+![DE E-4 subtractor truth table](https://github.com/04Varsha/FULL_ADDER_SUBTRACTOR/assets/149035374/33d8ba16-9169-40b0-8696-3bb8e5c3a0b7)
 
 
-**PROGRAM**
+**Procedure**
 
-Program for logic gates and verify its truth table in quartus using Verilog programming
+Write the detailed procedure here
 
- Developed by: RegisterNumber: 
- 
-**Logic symbol & Truthtable**
+~~~
+**Full Adder:**
+1.Open Quartus II and create a new project.
+2.Use schematic design entry to draw the full adder circuit. 
+3.The circuit consists of XOR, AND, and OR gates. 
+4.Compile the design, verify its functionality through simulation. 
+5.Implement the design on the target device and program it.
 
-**RTL realization Output:** 
+**Full Subtractor:** 
+1.Follow the same steps as for the full adder. 
+2.Draw the full subtractor circuit using schematic design. 
+3.The circuit includes XOR, AND, OR gates to perform subtraction. 
+4.Compile, simulate, implement, and program the design similarly to the full adder.
+~~~
 
-**RTL**
+**Program:**
+
+/* Program to design a half subtractor and full subtractor circuit and verify its truth table in quartus using Verilog programming.
+
+~~~
+
+## Full_adder
+module fulladd_top(a,b,cin,sum,carry);
+input a,b,cin;
+output sum,carry;
+wire w1,w2,w3,w4;       
+xor(w1,a,b);
+xor(sum,w1,cin);        
+
+and(w2,a,b);
+and(w3,b,cin);
+and(w4,cin,a);
+
+or(carry,w2,w3,w4);
+endmodule 
+
+## Full_subtractor
+module fullsub_top(a,b,Bin,BO,DIFF);
+input a,b,Bin;
+output BO,DIFF;
+assign DIFF = a ^ b ^ Bin;
+  assign BO = (a & b) | ((a ^ b) & Bin);
+endmodule
+
+
+Developed by: VARSHA A
+RegisterNumber: 212223220121
+~~~
+
+*/
+
+**RTL Schematic**
+
+![318332382-c01e6c3c-d648-4bad-8a98-66d93df13f1a](https://github.com/04Varsha/FULL_ADDER_SUBTRACTOR/assets/149035374/2e45d893-4f83-4a98-8bc2-d0d30b70e7e2)
+
+**Output Timing Waveform**
+
+**FULL ADDER**
+
+![318332443-3411cbc7-4f76-4664-a513-e348a9880eff](https://github.com/04Varsha/FULL_ADDER_SUBTRACTOR/assets/149035374/5d286c1d-e62e-454a-a389-00ba2c2a91fc)
+
+**FULL SUBTRACTOR**
+
+![318332487-1cc068c4-6398-4a52-bae8-39c6657c0a9a](https://github.com/04Varsha/FULL_ADDER_SUBTRACTOR/assets/149035374/03d5d030-815e-4847-a976-2fd282cf0333)
+
 
 **Result:**
+
+Thus the Full Adder and Full Subtractor circuits are designed and the truth tables is verified using Quartus software.
+
 
 
